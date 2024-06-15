@@ -1,7 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Param, Put, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, NotFoundException, ParseIntPipe, UsePipes, ValidationPipe,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { MembershipService } from './membership.service';
 import { Membership } from './membership.entity';
+import { CreateMembershipDto } from './dto/create-membership.dto';
+// import { UpdateMembershipDto } from './dto/update-membership.dto';
 
 @Controller('membership')
 export class MembershipController {
@@ -13,22 +18,27 @@ export class MembershipController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<Membership> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Membership> {
     return this.membershipService.findOne(id);
   }
 
   @Post()
-  create(@Body() membership: Membership): Promise<Membership> {
-    return this.membershipService.create(membership);
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async create(@Body() createMembershipDto: CreateMembershipDto): Promise<Membership> {
+    try {
+      return await this.membershipService.create(createMembershipDto as Membership);
+    } catch (error) {
+      throw new HttpException('Failed to create membership', HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() membership: Partial<Membership>): Promise<Membership> {
+  update(@Param('id', ParseIntPipe) id: number, @Body() membership: Partial<Membership>): Promise<Membership> {
     return this.membershipService.update(id, membership);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number): Promise<void> {
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.membershipService.remove(id);
   }
   

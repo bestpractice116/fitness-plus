@@ -33,7 +33,6 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
 
     ```env
     DATABASE_HOST=localhost
-    DATABASE_PORT=5432
     DATABASE_USERNAME=your_db_username
     DATABASE_PASSWORD=your_db_password
     DATABASE_NAME=your_db_name
@@ -66,20 +65,20 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
 
 ### Create a New Membership
 
-- **Endpoint**: `POST /memberships`
+- **Endpoint**: `POST /membership`
 - **Description**: Creates a new gym membership.
 - **Request Body**:
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Doe",
+      "firstName": "Chinedu",
+      "lastName": "Okafor",
       "membershipType": "Annual Basic",
-      "startDate": "2023-01-01",
-      "dueDate": "2024-01-01",
-      "totalAmount": 300.00,
+      "startDate": "2024-01-01",
+      "dueDate": "2025-01-01",
+      "totalAmount": 500.00,
       "monthlyAmount": 0,
-      "email": "john.doe@example.com",
+      "email": "user1@yopmail.com",
       "isFirstMonth": true
     }
     ```
@@ -91,21 +90,21 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
+      "firstName": "Chinedu",
+      "lastName": "Okafor",
       "membershipType": "Annual Basic",
-      "startDate": "2023-01-01",
-      "dueDate": "2024-01-01",
-      "totalAmount": 300.00,
+      "startDate": "2024-01-01",
+      "dueDate": "2025-01-01",
+      "totalAmount": 500.00,
       "monthlyAmount": 0,
-      "email": "john.doe@example.com",
+      "email": "user1@yopmail.com",
       "isFirstMonth": true
     }
     ```
 
 ### Get All Memberships
 
-- **Endpoint**: `GET /memberships`
+- **Endpoint**: `GET /membership`
 - **Description**: Retrieves a list of all gym memberships.
 - **Response**:
   - **Status**: `200 OK`
@@ -115,26 +114,50 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
     [
       {
         "id": 1,
-        "firstName": "John",
-        "lastName": "Doe",
+        "firstName": "Chinedu",
+        "lastName": "Okafor",
         "membershipType": "Annual Basic",
-        "startDate": "2023-01-01",
-        "dueDate": "2024-01-01",
-        "totalAmount": 300.00,
-        "monthlyAmount": 0,
-        "email": "john.doe@example.com",
+        "startDate": "2024-01-01",
+        "dueDate": "2025-01-01",
+        "totalAmount": 500.00,
+        "monthlyAmount": 0.00,
+        "email": "user1@yopmail.com",
         "isFirstMonth": true
       },
       {
         "id": 2,
-        "firstName": "Jane",
-        "lastName": "Smith",
+        "firstName": "Aisha",
+        "lastName": "Abubakar",
         "membershipType": "Monthly Premium",
-        "startDate": "2023-02-01",
-        "dueDate": null,
-        "totalAmount": 0,
+        "startDate": "2024-03-15",
+        "dueDate": "2024-04-15",
+        "totalAmount": 50.00,
+        "monthlyAmount": 50.00,
+        "email": "user2@yopmail.com",
+        "isFirstMonth": true
+      },
+      {
+        "id": 3,
+        "firstName": "Femi",
+        "lastName": "Adeyemi",
+        "membershipType": "Annual Premium",
+        "startDate": "2024-05-01",
+        "dueDate": "2025-05-01",
+        "totalAmount": 800.00,
+        "monthlyAmount": 0.00,
+        "email": "user3@yopmail.com",
+        "isFirstMonth": true
+      },
+      {
+        "id": 4,
+        "firstName": "Nneka",
+        "lastName": "Nwosu",
+        "membershipType": "Monthly Basic",
+        "startDate": "2024-06-01",
+        "dueDate": "2025-07-01",
+        "totalAmount": 0.00,
         "monthlyAmount": 30.00,
-        "email": "jane.smith@example.com",
+        "email": "user4@yopmail.com",
         "isFirstMonth": false
       }
     ]
@@ -142,7 +165,7 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
 
 ### Get a Single Membership by ID
 
-- **Endpoint**: `GET /memberships/:id`
+- **Endpoint**: `GET /membership/:id`
 - **Description**: Retrieves details of a specific gym membership by ID.
 - **Response**:
   - **Status**: `200 OK`
@@ -151,27 +174,27 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
+      "firstName": "Chinedu",
+      "lastName": "Okafor",
       "membershipType": "Annual Basic",
-      "startDate": "2023-01-01",
-      "dueDate": "2024-01-01",
-      "totalAmount": 300.00,
+      "startDate": "2024-01-01",
+      "dueDate": "2025-01-01",
+      "totalAmount": 500.00,
       "monthlyAmount": 0,
-      "email": "john.doe@example.com",
+      "email": "user1@yopmail.com",
       "isFirstMonth": true
     }
     ```
 
 ### Update a Membership
 
-- **Endpoint**: `PUT /memberships/:id`
+- **Endpoint**: `PUT /membership/:id`
 - **Description**: Updates the details of a specific gym membership by ID.
 - **Request Body** (Partial or Full Update):
 
     ```json
     {
-      "lastName": "Doe-Smith",
+      "lastName": "Nwafor",
       "membershipType": "Monthly Basic",
       "monthlyAmount": 20.00,
       "isFirstMonth": false
@@ -185,21 +208,21 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Doe-Smith",
+      "firstName": "Chinedu",
+      "lastName": "Nwafor",
       "membershipType": "Monthly Basic",
-      "startDate": "2023-01-01",
-      "dueDate": "2024-01-01",
-      "totalAmount": 300.00,
+      "startDate": "2024-01-01",
+      "dueDate": "2025-01-01",
+      "totalAmount": 500.00,
       "monthlyAmount": 20.00,
-      "email": "john.doe@example.com",
+      "email": "user1@yopmail.com",
       "isFirstMonth": false
     }
     ```
 
 ### Delete a Membership
 
-- **Endpoint**: `DELETE /memberships/:id`
+- **Endpoint**: `DELETE /membership/:id`
 - **Description**: Deletes a specific gym membership by ID.
 - **Response**:
   - **Status**: `204 No Content`
@@ -207,7 +230,7 @@ This API is built with NestJS and PostgreSQL to manage gym memberships, includin
 
 ### Send Reminder Email
 
-- **Endpoint**: `POST /memberships/:id/send-reminder`
+- **Endpoint**: `POST /membership/:id/send-reminder`
 - **Description**: Sends a reminder email to the specified membership.
 - **Response**:
   - **Status**: `200 OK`

@@ -70,15 +70,15 @@ async handleCron() {
 
   async sendReminderEmail(membership: Membership) {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: process.env.SMTP_HOST,
       auth: {
-        user: 'test@gmail.com',
-        pass: 'my password', // or use an App Password if 2-step verification is enabled
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS, // or use an App Password if 2-step verification is enabled
       },
     });
 
     const mailOptions = {
-      from: 'test@gmail.com',
+      from: process.env.SMTP_USER,
       to: membership.email,
       subject: `Fitness+ Membership Reminder - ${membership.membershipType}`,
       text: this.generateEmailBody(membership),
