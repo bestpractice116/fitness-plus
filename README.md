@@ -256,4 +256,4 @@ The application is configured using environment variables defined in a `.env` fi
 To run the tests, use the following command:
 
 ```bash
-npm run test
+npm run start:dev
